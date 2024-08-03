@@ -29,6 +29,7 @@ class BANUpdater(object):
     def register_last_model(self, weight):
         self.last_model = config.get_model()
         self.last_model.load_state_dict(torch.load(weight))
+        self.last_model = self.last_model.to('cuda')
 
     def kd_loss(self, outputs, labels, teacher_outputs, alpha=0.2, T=20):
         KD_loss = nn.KLDivLoss()(F.log_softmax(outputs/T, dim=1),

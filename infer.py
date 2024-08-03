@@ -6,7 +6,7 @@ import argparse
 import torch
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from torchvision.datasets import CIFAR10, MNIST
+from torchvision.datasets import CIFAR10, CIFAR100, MNIST
 
 from ban import config
 
@@ -31,6 +31,9 @@ def main():
     if args.dataset == "cifar10":
         testset = CIFAR10(root='./data', train=False,
                           download=True, transform=transform)
+    elif args.dataset == "cifar100":
+        testset = CIFAR100(root='/home/hongwei/KD/tiny-transformers/data', train=False,
+                           download=True, transform=transform)
     else:
         testset = MNIST(root="./data",
                         train=False,

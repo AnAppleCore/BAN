@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from torchvision.datasets import CIFAR10, MNIST
+from torchvision.datasets import CIFAR10, CIFAR100, MNIST
 from tensorboardX import SummaryWriter
 
 
@@ -52,6 +52,15 @@ def main():
                           train=False,
                           download=True,
                           transform=transform)
+    elif args.dataset == "cifar100":
+        trainset = CIFAR100(root="/home/hongwei/KD/tiny-transformers/data",
+                            train=True,
+                            download=True,
+                            transform=transform)
+        testset = CIFAR100(root="/home/hongwei/KD/tiny-transformers/data",
+                           train=False,
+                           download=True,
+                           transform=transform)
     else:
         trainset = MNIST(root="./data",
                          train=True,
@@ -113,6 +122,8 @@ def main():
                         best_loss = val_loss
                         last_model_weight = os.path.join(args.outdir,
                                                          "model"+str(gen)+".pth.tar")
+                        if not os.path.isdir(args.outdir):
+                            os.makedirs(args.outdir)
                         torch.save(updater.model.state_dict(),
                                    last_model_weight)
 
