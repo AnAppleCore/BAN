@@ -53,11 +53,11 @@ def main():
                           download=True,
                           transform=transform)
     elif args.dataset == "cifar100":
-        trainset = CIFAR100(root="/home/hongwei/KD/tiny-transformers/data",
+        trainset = CIFAR100(root="/data/datasets/CIFAR",
                             train=True,
                             download=True,
                             transform=transform)
-        testset = CIFAR100(root="/home/hongwei/KD/tiny-transformers/data",
+        testset = CIFAR100(root="/data/datasets/CIFAR",
                            train=False,
                            download=True,
                            transform=transform)
